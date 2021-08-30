@@ -1,0 +1,80 @@
+language: java
+jdk:
+  - openjdk11
+
+branches:
+  only:
+    - master
+    - develop
+
+env:
+  global:
+    - PROJECT_NAME=itsgo
+    - BEFORE_DEPLOY=before_deploy # s3 에 보낼 파일 경로 (zip 압축)
+    - SETTING_SHELL=$BEFORE_DEPLOY/settings.sh
+
+# Deploy 완료시 Slack 알림
+notifications:
+  slack:
+    - if: branch = master
+      rooms:
+        - secure: 0p2xebGfTZafOpzQLmo1J7UlshdMOfCo/q35Ofsc9ZPhXav7OCrOti/UEUT469eMU6yMy3ZdXbcCzfHQe4jXmHPYHJfDw2HD41a79U8acV6Biv0fjC00+RU1iOtrmYkJp06VPwXNzG0CfDEXSacrsOd/8OUkzttIBo3b5nJZb7uKOR8HcKgK+zUkmEqevTbPQ0aHjtlKQiNv2PTjmYqRk19IuFPLYu7cAdShGF3AGtXvmAyQKWyBiqNAz/1LRDQXloeo0x7A/02IYVs6V9j0NXrcAW2XxmF+AZxsijMsvgawIthNZbUDSuXkxOKsb6X1/QzCOCRBjbMjHPC38mHLYypwxriChBzPBcA9d/zh7H2J0tqk5Nxjf2aiDT5Tln9Vl3IQb1bR2iR9mvZriykSii+oEDpPHBbAHFbwKtN1L4gGfBM+PsUZsdGOeS7F9s+6wTVNLSJlTl9n15Bu9RYP0v18pKRnzPyOn8jO4AEBjEUL+6UfdWicWjc6NZk7aoLbfh7lGlSP+Jy5UmM/RQXeaYb7vdRM3h3W8tb0RRwE3Xp12pvg2M/AC9OJ5+GR+ETfTTdzVAeUjl33SQWfnKU+IOjuME0eiTeyfMGxp1IuHB6D2Dt2S5fxz4qviEz5Uab1+xHoqv8IefPwRRi7lmDxzEXk5vbDPdYVvOWjmxmI7Vc=
+    - if: branch = develop
+      rooms:
+        - secure: PL5iBoqNFjoENXtJc1VuDAzG0d86pFAqafVybyRAY8qKDA8OjKBhG9Kx1c/o/EjQYn92gWM+n7nQCOuOK2rgl6Dba3frsk2rKqMUq7Qq3niKydUN4d7yEn4g2d+5oLcIeM73Lyj9bt7UJsuqpKlRWjfCVgrmLzTgnULMMRR32c6lV1qqzLaM6CBEDgTb5Cr6rZ7ZF7ahO3Mnc1Vu+hzvC+Rhwu9rGT9KRyv/9qdr+bMcAQFYufwS1/J/EJVxoeoUsdZpSd0XhU8aZrtdBYrpV8iZWgl7WRtzGpQOx4z6/1XQhVm1xF7HFixg4HJh4jU0pbs/s9xBbej60Zk4KJWjfxoOgHduQnCsUmUaEQb+DNbuvtNfWc+qaBx3sjC2w6CZuHRI11LOQBTDgvEXKIT1dFI/Y7twuicRMePvxhcXp2M5rRMKAYEfF97Wl65W4934WhExHQz4fWjBDFe8mCuhMCiIajtJxik1UiWxrVZ2pMqQm2vwACe1C3VzgARH5oMws4PD9nii+w4XSwdzuj+nNXg3dWLJI6saU4jnhJkno2aqqnd7Wl7SSmk61ALY7VFvXlS2vxh2SU5Gk1jp0xtw+Zdbb7vvSTIHckE+nyPGh3ZKBcBaNb8TJoClnRS57AdaJ2Bj9QG+gGiPeXuBkiyAD1IHHOC9S/v3jeewfpUcZzo=
+
+# Gradle Dependency caching
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+script: "./gradlew clean build"
+
+before_install:
+  - chmod +x gradlew
+
+# 아래부터는 codeDeploy Agent 관련 설정 (IAM 권한)
+before_deploy:
+  - mkdir -p $BEFORE_DEPLOY
+  - cp appspec.yml $BEFORE_DEPLOY/
+  - cp scripts/*.sh $BEFORE_DEPLOY/
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then echo ENV=prod >> $SETTING_SHELL; fi
+  - if [ "$TRAVIS_BRANCH" == "develop" ]; then echo ENV=dev >> $SETTING_SHELL; fi
+  - cp build/libs/*.jar $BEFORE_DEPLOY/
+  - cd before_deploy && zip -r $BEFORE_DEPLOY *
+  - cd ../ && mkdir -p deploy
+  - mv $BEFORE_DEPLOY/*.zip deploy/$PROJECT_NAME.zip # Project
+
+deploy:
+  # TRAVIS CI -> S3
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값 (IAM CSS파일)
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값 (IAM CSS파일)
+    bucket: $S3_BUCKET_NAME # S3 버킷명
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private  # zip 파일 접근 Private
+    local_dir: deploy
+    wait-until-deployed: true
+    on:
+      all_branches: true
+
+  # S3 -> codeDeploy(EC2)
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: $S3_BUCKET_NAME
+    key: $PROJECT_NAME.zip
+    bundle_type: zip
+    application: $CODE_DEPLOY_NAME
+    deployment_group: $CODE_DEPLOY_GROUP_NAME
+    region: ap-northeast-2
+    wait-until-deployed: true
+    on:
+      all_branches: true
+
