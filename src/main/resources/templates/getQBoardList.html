@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>건의글 목록</h1>
+    <table>
+        <tr>
+            <th width="100">글 번호</th>
+            <th width="200">글 제목</th>
+            <th width="150">처리 여부</th>
+        </tr>
+        <tr th:each="qBoard:${qBoardList}">
+            <td th:text="${qBoard.id}"></td>
+            <td><a th:href="@{/getQBoard(id=${qBoard.id})}"
+                   th:text="${qBoard.title}"></a></td>
+            <td th:text="${qBoard.processing}"></td>
+        </tr>
+    </table>
+    <input type="button" value="등록" th:onclick="|location.href='@{/insertQBoard}'|">
+</body>
+</html>
+

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>공지글 목록</h1>
+    <table>
+        <tr>
+            <th width="100">글 번호</th>
+            <th width="200">글 제목</th>
+            <th width="150">조회수</th>
+        </tr>
+        <tr th:each="nBoard:${nBoardList}">
+            <td th:text="${nBoard.id}"></td>
+            <td><a th:href="@{/getNBoard(id=${nBoard.id})}"
+                    th:text="${nBoard.title}"></a></td>
+            <td th:text="${nBoard.hit}"></td>
+        </tr>
+    </table>
+</body>

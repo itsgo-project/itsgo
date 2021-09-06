@@ -46,10 +46,14 @@ spring:
 ---
 # LOCAL 설정
 spring:
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
   config:
     activate:
       on-profile: "local_conf"
-
+server:
+  port: 8081
 ---
 # DEV 설정
 spring:
@@ -77,6 +81,8 @@ spring:
       on-profile: "local_db"
   datasource:
     url: jdbc:h2:mem:testdb
+    username: "sa"
+    password: "1234"
   h2:
     console:
       enabled: true

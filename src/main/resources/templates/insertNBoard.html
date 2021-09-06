@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>공지글쓰기</title>
+</head>
+<body>
+    <form th:action="@{insertNBoard}" method="post">
+        <label for="title">제목</label>
+        <input type="text" name="title" id="title">
+        <textarea name="content" cols="40" rows="10"></textarea>
+
+        <!--session 처리 -->
+        <input type="text" name="writer">
+
+        <input type="submit" value="등록">
+    </form>
+    <!-- 관리자 페이지이동으로 변경-->
+    <input type="button" value="취소" th:onclick="|location.href='@{/getNBoardList}'|">
+</body>
+</html>

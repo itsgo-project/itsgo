@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>건의글쓰기</title>
+</head>
+<body>
+    <h1>건의글쓰기</h1>
+    <form action="@{insertQBoard}" method="post">
+        제목 <input type="text" name="title">
+        <textarea name="content" cols="40" rows="10"></textarea>
+        공개여부 <input type="radio" name="secret" value="0"> 공개
+                <input type="radio" name="secret" value="1"> 비공개
+        <input type="submit" value="건의글등록">
+        <input type="button" value="취소" th:onclick="|location.href='@{/getQBoardList}'|">
+    </form>
+</body>
+</html>
+
+
