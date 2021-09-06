@@ -98,7 +98,7 @@ spring:
     activate:
       on-profile: "dev_db"
   datasource:
-    url: "jdbc:mariadb://spring-studyproject-prod-db.cvqhdwcwpjhp.ap-northeast-2.rds.amazonaws.com:3306/springstudydb"
+    url: "jdbc:mariadb://spring-studyproject-prod-rds.cj66epurnv1i.ap-northeast-2.rds.amazonaws.com:3306/springstudydb"
     username: "rdb"
     password: "springstudy"
   jpa:
