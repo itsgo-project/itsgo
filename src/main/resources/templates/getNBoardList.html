@@ -19,4 +19,6 @@
             <td th:text="${nBoard.hit}"></td>
         </tr>
     </table>
+    <lable for="testNotice"></lable>
+    <input type="button" id="testNotice" value="공지글쓰기" th:onclick="|location.href='@{/insertNBoard}'|">
 </body>

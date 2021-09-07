@@ -54,6 +54,9 @@ spring:
       on-profile: "local_conf"
 server:
   port: 8081
+logging:
+  level:
+    root: debug
 ---
 # DEV 설정
 spring:

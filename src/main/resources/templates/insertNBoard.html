@@ -5,17 +5,29 @@
     <title>공지글쓰기</title>
 </head>
 <body>
-    <form th:action="@{insertNBoard}" method="post">
-        <label for="title">제목</label>
-        <input type="text" name="title" id="title">
-        <textarea name="content" cols="40" rows="10"></textarea>
+    <h1>공지글쓰기</h1>
+    <table>
+        <form th:action="@{insertNBoard}" method="post">
+            <!--session 처리 -->
+            <input type="hidden" name="writer" value="관리자">
+            <tr>
+                <td><label for="title">제목</label></td>
+                <td colspan="3"><input type="text" name="title" id="title"></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <textarea name="content" cols="40" rows="10"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>빈칸</td>
+                <td>빈칸</td>
+                <td><input type="submit" value="등록"></td>
+                <!-- 관리자 페이지이동으로 변경-->
+                <td><input type="button" value="취소" th:onclick="|location.href='@{/getNBoardList}'|"></td>
+            </tr>
+        </form>
 
-        <!--session 처리 -->
-        <input type="text" name="writer">
-
-        <input type="submit" value="등록">
-    </form>
-    <!-- 관리자 페이지이동으로 변경-->
-    <input type="button" value="취소" th:onclick="|location.href='@{/getNBoardList}'|">
+    </table>
 </body>
 </html>

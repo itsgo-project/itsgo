@@ -7,16 +7,24 @@
 <body>
     <h1>건의게시글상세</h1>
     <hr>
-    <!--수정 부분 수정해야함 -->
-    <form th:action="@{updateQBoard}" method="post">
-        <input type="hidden" name="id" th:value="${qBoard.id}" >
-        <input type="text" name="title" th:value="${qBoard.title}">
-        <textarea name="content" cols="40" rows="10" th:text="${qBoard.content}">
-        </textarea>
-        <input type="submit" value="수정">
-    </form>
-    <!--삭제 여부 팝업 후 처리-->
-    <a th:href="@{/deleteQBoard(id=${qBoard.id})}">삭제</a>
-    <a th:href="@{/getQBoardList}">확인</a>
+    <input type="hidden" name="id" th:value="${qBoard.id}" />
+    <table>
+        <tr>
+            <td><label for="title"></label></td>
+            <td colspan="3"><input type="text" id="title" name="title" th:value="${qBoard.title}"></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <textarea name="content" cols="40" rows="10" th:text="${qBoard.content}" />
+            </td>
+        </tr>
+        <tr>
+            <td>빈칸</td>
+            <!--삭제 여부 팝업 후 처리-->
+            <td><a th:href="@{/deleteQBoard(id=${qBoard.id})}">삭제</a></td>
+            <td><a th:href="@{/getQBoardList}">확인</a></td>
+            <td><a th:href="@{/updateQBoard(id=${qBoard.id})}">수정</a></td>
+        </tr>
+    </table>
 </body>
 </html>

@@ -19,7 +19,8 @@
             <td th:text="${qBoard.processing}"></td>
         </tr>
     </table>
-    <input type="button" value="등록" th:onclick="|location.href='@{/insertQBoard}'|">
+    <lable for="inquiry"></lable>
+    <input type="button" id="inquiry" value="건의하기" th:onclick="|location.href='@{/insertQBoard}'|">
 </body>
 </html>
 

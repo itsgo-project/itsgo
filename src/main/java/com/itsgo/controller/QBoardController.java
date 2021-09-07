@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -43,6 +44,13 @@ public class QBoardController
     {
         model.addAttribute("qBoard", qBoardService.getQBoard(qBoard));
         return "getQBoard";
+    }
+
+    @GetMapping("/updateQBoard")
+    public String updateQBoardView(QBoard qBoard, Model model)
+    {
+        model.addAttribute("qBoard", qBoardService.getQBoard(qBoard));
+        return "updateQBoard";
     }
 
     @PostMapping("/updateQBoard")

@@ -35,6 +35,7 @@ public class QBoardServiceImpl implements QBoardService
     public void updateQBoard(QBoard qBoard)
     {
         QBoard findQBoard = qBoardRepository.findById(qBoard.getId()).get();
+        System.out.println(qBoardRepository.findById(qBoard.getId()));
         findQBoard.setTitle(qBoard.getTitle());
         findQBoard.setContent(qBoard.getContent());
         qBoardRepository.save(findQBoard);

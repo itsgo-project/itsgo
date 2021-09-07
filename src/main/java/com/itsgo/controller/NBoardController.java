@@ -1,8 +1,6 @@
 package com.itsgo.controller;
 
-import com.itsgo.dto.FreeBoard;
 import com.itsgo.dto.NBoard;
-import com.itsgo.dto.QBoard;
 import com.itsgo.service.NBoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
