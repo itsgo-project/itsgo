@@ -45,10 +45,24 @@ public class NBoardController
         return "getNBoard";
     }
 
+    @GetMapping("/updateNBoard")
+    public String updateNBoardView(NBoard nBoard, Model model)
+    {
+        model.addAttribute("nBoard", nBoardService.getNBoard(nBoard));
+        return "updateNBoard";
+    }
+
     @PostMapping("/updateNBoard")
     public String updateNBoard(NBoard nBoard)
     {
         nBoardService.updateNBoard(nBoard);
         return "forward:getNBoardList";
+    }
+
+//    임시
+    @GetMapping("/adminPage")
+    public String adminPage()
+    {
+        return "adminPage";
     }
 }

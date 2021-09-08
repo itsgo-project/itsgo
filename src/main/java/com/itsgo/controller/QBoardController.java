@@ -3,6 +3,9 @@ package com.itsgo.controller;
 import com.itsgo.dto.QBoard;
 import com.itsgo.service.QBoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +22,9 @@ public class QBoardController
     final private QBoardService qBoardService;
 
     @RequestMapping("/getQBoardList")
-    public String getQBoardList(Model model, QBoard qBoard)
+    public String getQBoardList(@PageableDefault Pageable pageable, Model model)
     {
-        List<QBoard> qBoardList = qBoardService.getQBoardList(qBoard);
+        Page<QBoard> qBoardList = qBoardService.getQBoardList(pageable);
         model.addAttribute("qBoardList", qBoardList);
         return "getQBoardList";
     }

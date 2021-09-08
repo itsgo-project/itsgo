@@ -21,6 +21,29 @@
     </table>
     <lable for="inquiry"></lable>
     <input type="button" id="inquiry" value="건의하기" th:onclick="|location.href='@{/insertQBoard}'|">
+
+    <table th:with="start=${T(Math).floor(qBoardList.number / 15) * 15 + 1},
+                    last=(${start + 9 < qBoardList.totalPages ? start + 9 : qBoardList.totalPages})">
+        <tr>
+            <td>
+                <a th:href="@{/getQBoardList(page=1)}">
+                First
+                </a>
+            </td>
+            <td>
+                &lt;
+            </td>
+
+            <td>
+                &gt;
+            </td>
+            <td>
+                <a th:href="@{/getQBoardList(page=${qBoardList.totalPages})}">
+                    Last
+                </a>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
 

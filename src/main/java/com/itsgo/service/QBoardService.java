@@ -1,12 +1,12 @@
 package com.itsgo.service;
 
 import com.itsgo.dto.QBoard;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface QBoardService
 {
-    List<QBoard> getQBoardList(QBoard qBoard);
+    Page<QBoard> getQBoardList(Pageable pageable);
 
     void insertQBoard(QBoard qBoard);
 

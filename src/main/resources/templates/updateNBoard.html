@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>공지글</title>
+</head>
+<body>
+    <h1>공지글상세</h1>
+    <hr>
+    <!--수정 부분 수정해야함 -->
+    <form th:action="@{updateNBoard}" method="post">
+        <table>
+        <!--Session 처리 해야함 -->
+            <tr>
+                <label for="id">
+                    <input type="hidden" id="id" name="id" th:value="${nBoard.id}" />
+                </label>
+            </tr>
+            <tr>
+                <td><label for="title">제목</label></td>
+                <td colspan="3"><input type="text" id="title" name="title" th:value="${nBoard.title}" /></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <textarea name="content" cols="40" rows="10" th:text="${nBoard.content}" />
+                </td>
+            </tr>
+            <tr>
+                <td>빈칸</td>
+                <td><input type="submit" value="수정"></td>
+                <!-- 관리자 페이지로 변경해야함 -->
+
+                <td><a th:href="@{/adminPage}">취소</a></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

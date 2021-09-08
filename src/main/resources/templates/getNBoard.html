@@ -7,32 +7,29 @@
 <body>
     <h1>공지글상세</h1>
     <hr>
-    <!--수정 부분 수정해야함 -->
-    <form th:action="@{updateNBoard}" method="post">
-        <table>
-        <!--Session 처리 해야함 -->
-            <tr>
-                <label for="id">
-                    <input type="hidden" id="id" name="id" th:value="${nBoard.id}" />
-                </label>
-            </tr>
-            <tr>
-                <td><label for="title">제목</label></td>
-                <td colspan="3"><input type="text" id="title" name="title" th:value="${nBoard.title}" /></td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    <textarea name="content" cols="40" rows="10" th:text="${nBoard.content}" />
-                </td>
-            </tr>
-            <tr>
-                <td>빈칸</td>
-                <td><input type="submit" value="수정"></td>
-                <!--삭제 여부 팝업 후 처리-->
-                <td><a th:href="@{/deleteNBoard(id=${nBoard.id})}">삭제</a></td>
-                <td><a th:href="@{/getNBoardList}">확인</a></td>
-            </tr>
-        </table>
-    </form>
+    <table>
+    <!--Session 처리 해야함 -->
+        <tr>
+            <label for="id">
+                <input type="hidden" id="id" name="id" th:value="${nBoard.id}" />
+            </label>
+        </tr>
+        <tr>
+            <td><label for="title">제목</label></td>
+            <td colspan="3"><input type="text" id="title" name="title" th:value="${nBoard.title}" /></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <textarea name="content" cols="40" rows="10" th:text="${nBoard.content}" />
+            </td>
+        </tr>
+        <tr>
+            <td>빈칸</td>
+            <td><a th:href="@{/updateNBoard(id=${nBoard.id})}">수정</a></td>
+            <!--삭제 여부 팝업 후 처리-->
+            <td><a th:href="@{/deleteNBoard(id=${nBoard.id})}">삭제</a></td>
+            <td><a th:href="@{/getNBoardList}">확인</a></td>
+        </tr>
+    </table>
 </body>
 </html>

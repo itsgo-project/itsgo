@@ -3,9 +3,11 @@ package com.itsgo.service;
 import com.itsgo.dto.QBoard;
 import com.itsgo.repository.QBoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -13,10 +15,26 @@ public class QBoardServiceImpl implements QBoardService
 {
     final private QBoardRepository qBoardRepository;
 
-    @Override
-    public List<QBoard> getQBoardList(QBoard qBoard)
+    public void makeData()
     {
-        return (List<QBoard>) qBoardRepository.findAll();
+        for(int i = 1; i <= 5; i++)
+        {
+            QBoard qboard = new QBoard();
+            qboard.setTitle("제목" + i);
+            qboard.setWrite("글쓴이" + i);
+            qboard.setContent("아무내용");
+            qBoardRepository.save(qboard);
+        }
+    }
+
+    @Override
+    public Page<QBoard> getQBoardList(Pageable pageable)
+    {
+        makeData();
+        int page= (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+        pageable = PageRequest.of(page, 15, Sort.by("id").descending());
+
+        return qBoardRepository.findAll(pageable);
     }
 
     @Override
