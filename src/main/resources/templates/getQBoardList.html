@@ -31,11 +31,17 @@
                 </a>
             </td>
             <td>
+                <a th:href="${qBoardList.first} ? '#' : @{/getQBoardList(page=${qBoardList.number})}">
                 &lt;
+                </a>
             </td>
-
+            <td th:each="page: ${#numbers.sequence(start, last)}">
+                <a th:text="${page}" th:href="${page == qBoardList.number + 1} ? '#' : @{/getQBoardList(page=${page})}"></a>
+            </td>
             <td>
+                <a th:href="${qBoardList.last} ? '#' : @{/getQBoardList(page=${qBoardList.number + 2})}">
                 &gt;
+                </a>
             </td>
             <td>
                 <a th:href="@{/getQBoardList(page=${qBoardList.totalPages})}">
@@ -46,4 +52,3 @@
     </table>
 </body>
 </html>
-
