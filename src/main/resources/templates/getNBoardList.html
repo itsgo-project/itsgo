@@ -19,5 +19,33 @@
             <td th:text="${nBoard.hit}"></td>
         </tr>
     </table>
+    <table th:with="start=${T(Math).floor(nBoardList.number / 15) * 15 + 1},
+                    last=(${start + 9 < nBoardList.totalPages ? start + 9 : nBoardList.totalPages})">
+        <tr>
+            <td>
+                <a th:href="@{/getNBoardList(page=1)}">
+                    First
+                </a>
+            </td>
+            <td>
+                <a th:href="${nBoardList.first} ? '#' : @{/getNBoardList(page=${nBoardList.number})}">
+                    &lt;
+                </a>
+            </td>
+            <td th:each="page: ${#numbers.sequence(start, last)}">
+                <a th:text="${page}" th:href="${page == nBoardList.number + 1} ? '#' : @{/getNBoardList(page=${page})}"></a>
+            </td>
+            <td>
+                <a th:href="${nBoardList.last} ? '#' : @{/getNBoardList(page=${nBoardList.number + 2})}">
+                    &gt;
+                </a>
+            </td>
+            <td>
+                <a th:href="@{/getNBoardList(page=${nBoardList.totalPages})}">
+                    Last
+                </a>
+            </td>
+        </tr>
+    </table>
     <a th:href="@{/adminPage}">관리자페이지</a>
 </body>

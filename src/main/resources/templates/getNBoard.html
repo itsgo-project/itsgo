@@ -16,16 +16,16 @@
         </tr>
         <tr>
             <td><label for="title">제목</label></td>
-            <td colspan="3"><input type="text" id="title" name="title" th:value="${nBoard.title}" /></td>
+            <td colspan="3"><input type="text" id="title" name="title" th:value="${nBoard.title}" readonly/></td>
         </tr>
         <tr>
             <td colspan="4">
-                <textarea name="content" cols="40" rows="10" th:text="${nBoard.content}" />
+                <textarea name="content" cols="40" rows="10" th:text="${nBoard.content}" readonly/>
             </td>
         </tr>
         <tr>
             <td>빈칸</td>
-            <td><a th:href="@{/updateNBoard(id=${nBoard.id})}">수정</a></td>
+            <td><a th:href="@{/updateNBoard(id=${nBoard.id})}">수정하기</a></td>
             <!--삭제 여부 팝업 후 처리-->
             <td><a th:href="@{/deleteNBoard(id=${nBoard.id})}">삭제</a></td>
             <td><a th:href="@{/getNBoardList}">확인</a></td>

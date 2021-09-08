@@ -3,9 +3,11 @@ package com.itsgo.service;
 import com.itsgo.dto.NBoard;
 import com.itsgo.repository.NBoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -14,9 +16,11 @@ public class NBoardServiceImpl implements NBoardService
     final private NBoardRepository nBoardRepository;
 
     @Override
-    public List<NBoard> getNBoardList(NBoard nBoard)
+    public Page<NBoard> getNBoardList(Pageable pageable)
     {
-        return (List<NBoard>)nBoardRepository.findAll();
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+        pageable = PageRequest.of(page, 15, Sort.by("id").descending());
+        return nBoardRepository.findAll(pageable);
     }
 
     @Override

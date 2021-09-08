@@ -1,12 +1,12 @@
 package com.itsgo.service;
 
 import com.itsgo.dto.NBoard;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface NBoardService
 {
-    List<NBoard> getNBoardList(NBoard nBoard);
+    Page<NBoard> getNBoardList(Pageable pageable);
 
     void insertNBoard(NBoard nBoard);
 

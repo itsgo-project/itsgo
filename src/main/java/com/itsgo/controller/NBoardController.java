@@ -3,13 +3,14 @@ package com.itsgo.controller;
 import com.itsgo.dto.NBoard;
 import com.itsgo.service.NBoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,9 +19,9 @@ public class NBoardController
     final private NBoardService nBoardService;
 
     @RequestMapping("/getNBoardList")
-    public String getNBoardList(Model model, NBoard nBoard)
+    public String getNBoardList(@PageableDefault Pageable pageable, Model model)
     {
-        List<NBoard> nBoardList = nBoardService.getNBoardList(nBoard);
+        Page<NBoard> nBoardList = nBoardService.getNBoardList(pageable);
         model.addAttribute("nBoardList", nBoardList);
         return "getNBoardList";
     }
