@@ -35,7 +35,9 @@
                 &lt;
                 </a>
             </td>
-            <td th:each="page: ${#numbers.sequence(start, last)}">
+            <td th:each="page: ${#numbers.sequence(start, last)}" th:if="${qBoardList.number == qBoardList.totalPages}" th:text="${qBoardList.number + 1}">
+            </td>
+            <td th:each="page: ${#numbers.sequence(start, last)}" th:unless="${qBoardList.number == qBoardList.totalPages}">
                 <a th:text="${page}" th:href="${page == qBoardList.number + 1} ? '#' : @{/getQBoardList(page=${page})}"></a>
             </td>
             <td>
