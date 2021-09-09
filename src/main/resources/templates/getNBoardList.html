@@ -19,7 +19,7 @@
             <td th:text="${nBoard.hit}"></td>
         </tr>
     </table>
-    <table th:with="start=${T(Math).floor(nBoardList.number / 15) * 15 + 1},
+    <table th:with="start=${T(Math).floor(nBoardList.number / 10) * 10 + 1},
                     last=(${start + 9 < nBoardList.totalPages ? start + 9 : nBoardList.totalPages})">
         <tr>
             <td>
@@ -32,9 +32,13 @@
                     &lt;
                 </a>
             </td>
-            <td th:each="page: ${#numbers.sequence(start, last)}">
+            <td th:if="${0 == nBoardList.totalPages}" th:text="1">
+            </td>
+
+            <td th:each="page: ${#numbers.sequence(start, last)}" th:unless="${0 == nBoardList.totalPages}">
                 <a th:text="${page}" th:href="${page == nBoardList.number + 1} ? '#' : @{/getNBoardList(page=${page})}"></a>
             </td>
+
             <td>
                 <a th:href="${nBoardList.last} ? '#' : @{/getNBoardList(page=${nBoardList.number + 2})}">
                     &gt;
