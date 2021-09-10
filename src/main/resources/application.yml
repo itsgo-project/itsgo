@@ -46,17 +46,15 @@ spring:
 ---
 # LOCAL 설정
 spring:
-  thymeleaf:
-    prefix: classpath:templates/
-    suffix: .html
   config:
     activate:
       on-profile: "local_conf"
-server:
-  port: 8888
 logging:
   level:
-    root: debug
+    com.itsgo:
+      controller: debug
+      domain: debug
+      service: debug
 ---
 # DEV 설정
 spring:
