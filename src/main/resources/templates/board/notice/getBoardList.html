@@ -13,12 +13,10 @@
             <th width="150">조회수</th>
         </tr>
         <tr th:each="boardList:${boardList}">
-            <td th:text="${boardList.number}"></td>
-            <!--
+            <td th:text="${boardList.id}"></td>
             <td><a th:href="@{/getNBoard(id=${nBoard.id})}"
                     th:text="${nBoard.title}"></a></td>
-                    -->
-            <td th:text="${boardList.hit}"></td>
+            <td th:text="${boardList.boardHit}"></td>
         </tr>
     </table>
     <!--
@@ -55,5 +53,6 @@
         </tr>
     </table>
     -->
-    <a th:href="@{/adminPage}">관리자페이지</a>
+    <!--임시 -->
+    <a th:href="@{/board/notice/adminPage}">관리자페이지</a>
 </body>

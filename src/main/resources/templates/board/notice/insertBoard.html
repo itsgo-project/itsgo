@@ -7,16 +7,18 @@
 <body>
     <h1>공지글쓰기</h1>
     <table>
-        <form th:action="@{insertNBoard}" method="post">
+        <form th:action="@{/board/notice/insertBoard}" method="post">
             <!--session 처리 -->
-            <input type="hidden" name="writer" value="관리자">
+            <input type="hidden" name="createdBy" value="관리자">
             <tr>
-                <td><label for="title">제목</label></td>
-                <td colspan="3"><input type="text" name="title" id="title"></td>
+                <td><label for="boardTitle">제목</label></td>
+                <td colspan="3"><input type="text" name="boardTitle" id="boardTitle"></td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <textarea name="content" cols="40" rows="10"></textarea>
+                    <label>
+                        <textarea name="boardContent" cols="40" rows="10"></textarea>
+                    </label>
                 </td>
             </tr>
             <tr>

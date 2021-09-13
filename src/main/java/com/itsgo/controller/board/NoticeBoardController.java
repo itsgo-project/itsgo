@@ -10,8 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("board/notice")
@@ -28,6 +31,25 @@ public class NoticeBoardController
         model.addAttribute("boardList", boardList);
         return "/board/notice/getBoardList";
     }
+    //    임시
+    @GetMapping("/adminPage")
+    public String adminPage()
+    {
+        return "adminPage";
+    }
+
+    @GetMapping("/insertBoard")
+    public String insertBoardView()
+    {
+        return "/board/notice/insertBoard";
+    }
+
+    @PostMapping("/insertBoard")
+    public String insertBoard(@ModelAttribute BoardNoticeDto dto)
+    {
+        boardService.insertBoard(boardMapper.toEntity(dto));
+        return "redirect:getBoardList";
+    }
 
 
 //    @PostMapping("/study/new")
@@ -37,18 +59,9 @@ public class NoticeBoardController
 //        redirectAttributes.addAttribute("id", saveBoard.getId());
 //        return "redirect:/study/{id}";
 //    }
-//    @GetMapping("/insertNBoard")
-//    public String insertNBoardView()
-//    {
-//        return "insertNBoard";
-//    }
+
 //
-//    @PostMapping("/insertNBoard")
-//    public String insertNBoard(NBoard nBoard)
-//    {
-//        nBoardService.insertNBoard(nBoard);
-//        return "redirect:getNBoardList";
-//    }
+//
 //
 //    @GetMapping("/getNBoard")
 //    public String getNBoard(NBoard nBoard, Model model)
@@ -71,10 +84,5 @@ public class NoticeBoardController
 //        return "forward:getNBoardList";
 //    }
 //
-////    임시
-//    @GetMapping("/adminPage")
-//    public String adminPage()
-//    {
-//        return "adminPage";
-//    }
+
 }
