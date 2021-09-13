@@ -12,13 +12,16 @@
             <th width="200">글 제목</th>
             <th width="150">조회수</th>
         </tr>
-        <tr th:each="nBoard:${nBoardList}">
-            <td th:text="${nBoard.id}"></td>
+        <tr th:each="boardList:${boardList}">
+            <td th:text="${boardList.number}"></td>
+            <!--
             <td><a th:href="@{/getNBoard(id=${nBoard.id})}"
                     th:text="${nBoard.title}"></a></td>
-            <td th:text="${nBoard.hit}"></td>
+                    -->
+            <td th:text="${boardList.hit}"></td>
         </tr>
     </table>
+    <!--
     <table th:with="start=${T(Math).floor(nBoardList.number / 10) * 10 + 1},
                     last=(${start + 9 < nBoardList.totalPages ? start + 9 : nBoardList.totalPages})">
         <tr>
@@ -51,5 +54,6 @@
             </td>
         </tr>
     </table>
+    -->
     <a th:href="@{/adminPage}">관리자페이지</a>
 </body>
