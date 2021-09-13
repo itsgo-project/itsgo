@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class BoardStudyService extends BoardService<BoardStudy, BoardStudyRepository> {
-
-    public BoardStudyService(BoardStudyRepository boardRepository) {
+public class BoardStudyService extends BoardService<BoardStudy, BoardStudyRepository>
+{
+    public BoardStudyService(BoardStudyRepository boardRepository)
+    {
         super(boardRepository);
     }
 }
-
