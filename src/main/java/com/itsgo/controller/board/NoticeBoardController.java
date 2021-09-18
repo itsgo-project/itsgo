@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("board/notice")
@@ -47,11 +46,46 @@ public class NoticeBoardController
     @PostMapping("/insertBoard")
     public String insertBoard(@ModelAttribute BoardNoticeDto dto)
     {
-        boardService.insertBoard(boardMapper.toEntity(dto));
+        boardService.insertBoard(toEntity(dto));
         return "redirect:getBoardList";
     }
 
+    @GetMapping("/getBoard")
+    public String getBoard(Long id, Model model)
+    {
+        System.out.println(id);
+        model.addAttribute("boardNotice", toDto(boardService.getBoard(id)));
+        return "/board/notice/getBoard";
+    }
 
+    protected BoardNoticeDto toDto(BoardNotice e)
+    {
+        return boardMapper.toDto(e);
+    }
+
+    protected BoardNotice toEntity(BoardNoticeDto d)
+    {
+        return boardMapper.toEntity(d);
+    }
+//    @PostMapping("/study/new")
+//    public String create(@ModelAttribute BoardStudyDto dto, Model model, RedirectAttributes redirectAttributes) {
+//        log.debug(dto.toString());
+//        BoardStudy saveBoard = boardService.save(boardMapper.toEntity(dto));
+//        redirectAttributes.addAttribute("id", saveBoard.getId());
+//        return "redirect:/study/{id}";
+//    }
+//
+//    @GetMapping("/study/{id}")
+//    public String view(@PathVariable Long id, Model model) {
+//        // model.addAttribute(new BoardStudyDto());
+//        return "/study/viewForm";
+//    }
+//
+//    @GetMapping("/study/{id}/edit")
+//    public String edit(@PathVariable Long id, Model model) {
+//        // model.addAttribute(new BoardStudyDto());
+//        return "/study/viewForm";
+//    }
 //    @PostMapping("/study/new")
 //    public String create(@ModelAttribute BoardStudyDto dto, Model model, RedirectAttributes redirectAttributes) {
 //        log.debug(dto.toString());
@@ -63,12 +97,7 @@ public class NoticeBoardController
 //
 //
 //
-//    @GetMapping("/getNBoard")
-//    public String getNBoard(NBoard nBoard, Model model)
-//    {
-//        model.addAttribute("nBoard", nBoardService.getNBoard(nBoard));
-//        return "getNBoard";
-//    }
+//
 //
 //    @GetMapping("/updateNBoard")
 //    public String updateNBoardView(NBoard nBoard, Model model)

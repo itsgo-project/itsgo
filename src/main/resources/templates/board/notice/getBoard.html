@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>공지글</title>
+</head>
+<body>
+    <h1>공지글상세</h1>
+    <hr>
+    <table>
+    <!--Session 처리 해야함 -->
+        <tr>
+            <label for="id">
+                <input type="hidden" id="id" name="id" th:value="${boardNotice.id}" />
+            </label>
+        </tr>
+        <tr>
+            <td><label for="boardTitle">제목</label></td>
+            <td colspan="3"><input type="text" id="boardTitle" name="boardTitle" th:value="${boardNotice.boardTitle}" readonly/></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <label>
+                    <textarea name="boardContent" cols="40" rows="10" th:text="${boardNotice.boardContent}" readonly/>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>빈칸</td>
+            <td><a th:href="@{/updateBoard(id=${boardNotice.id})}">수정하기</a></td>
+            <!--삭제 여부 팝업 후 처리 -->
+            <td><a th:href="@{/deleteBoard(id=${boardNotice.id})}">삭제</a></td>
+            <td><a th:href="@{/getBoardList}">확인</a></td>
+        </tr>
+    </table>
+</body>
+</html>

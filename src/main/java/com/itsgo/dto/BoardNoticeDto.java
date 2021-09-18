@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class BoardNoticeDto
 {
+    private Long id;
     private String boardTitle;
     private String boardContent;
     private String createdBy;

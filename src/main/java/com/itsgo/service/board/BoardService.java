@@ -2,7 +2,6 @@ package com.itsgo.service.board;
 
 import com.itsgo.domain.board.Board;
 import com.itsgo.domain.board.BoardNotice;
-import com.itsgo.dto.QBoard;
 import com.itsgo.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,6 +24,11 @@ public abstract class BoardService<T extends Board, R extends BoardRepository<T>
         return boardRepository.findById(id);
     }
 
+    public T getBoard(Long id)
+    {
+        return boardRepository.findById(id).get();
+    }
+
     public Page<T> getBoardList(Pageable pageable)
     {
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
@@ -37,9 +41,9 @@ public abstract class BoardService<T extends Board, R extends BoardRepository<T>
         boardRepository.save(board);
     }
 
-//    public NBoard getNBoard(NBoard nBoard)
+//    public T getNBoard(T board)
 //    {
-//        return nBoardRepository.findById(nBoard.getId()).get();
+//        return boardRepository.findById(board.getId()).get();
 //    }
 //
 //    @Override

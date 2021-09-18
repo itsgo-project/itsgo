@@ -14,8 +14,8 @@
         </tr>
         <tr th:each="boardList:${boardList}">
             <td th:text="${boardList.id}"></td>
-            <td><a th:href="@{/getNBoard(id=${nBoard.id})}"
-                    th:text="${nBoard.title}"></a></td>
+            <td><a th:href="@{/board/notice/getBoard(id=${boardList.id})}"
+                    th:text="${boardList.boardTitle}"></a></td>
             <td th:text="${boardList.boardHit}"></td>
         </tr>
     </table>
