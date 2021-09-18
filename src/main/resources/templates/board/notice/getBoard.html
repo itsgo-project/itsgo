@@ -27,10 +27,10 @@
         </tr>
         <tr>
             <td>빈칸</td>
-            <td><a th:href="@{/updateBoard(id=${boardNotice.id})}">수정하기</a></td>
+            <td><a th:href="@{/board/notice/updateBoard(id=${boardNotice.id})}">수정하기</a></td>
             <!--삭제 여부 팝업 후 처리 -->
-            <td><a th:href="@{/deleteBoard(id=${boardNotice.id})}">삭제</a></td>
-            <td><a th:href="@{/getBoardList}">확인</a></td>
+            <td><a th:href="@{/board/notice/deleteBoard(id=${boardNotice.id})}">삭제</a></td>
+            <td><a th:href="@{/board/notice/getBoardList}">확인</a></td>
         </tr>
     </table>
 </body>

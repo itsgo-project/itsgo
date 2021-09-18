@@ -8,21 +8,21 @@
     <h1>공지글상세</h1>
     <hr>
     <!--수정 부분 수정해야함 -->
-    <form th:action="@{updateNBoard}" method="post">
+    <form th:action="@{/board/notice/updateBoard}" method="post">
         <table>
         <!--Session 처리 해야함 -->
             <tr>
                 <label for="id">
-                    <input type="hidden" id="id" name="id" th:value="${nBoard.id}" />
+                    <input type="hidden" id="id" name="id" th:value="${boardNotice.id}" />
                 </label>
             </tr>
             <tr>
-                <td><label for="title">제목</label></td>
-                <td colspan="3"><input type="text" id="title" name="title" th:value="${nBoard.title}" /></td>
+                <td><label for="boardTitle">제목</label></td>
+                <td colspan="3"><input type="text" id="boardTitle" name="boardTitle" th:value="${boardNotice.boardTitle}" /></td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <textarea name="content" cols="40" rows="10" th:text="${nBoard.content}" />
+                    <textarea name="content" cols="40" rows="10" th:text="${boardNotice.boardContent}" />
                 </td>
             </tr>
             <tr>

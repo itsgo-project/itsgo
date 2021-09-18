@@ -23,6 +23,21 @@ public class NoticeBoardController
     private final BoardNoticeService boardService;
     private final BoardNoticeMapper boardMapper;
 
+    @GetMapping("/updateBoard")
+    public String updateBoardView(Long id, Model model)
+    {
+        model.addAttribute("boardNotice", toDto(boardService.getBoard(id)));
+        return "/board/notice/updateBoard";
+    }
+
+//    @PostMapping("/updateNBoard")
+//    public String updateBoard(NBoard nBoard)
+//    {
+//        nBoardService.updateNBoard(nBoard);
+//        return "forward:getNBoardList";
+//    }
+
+
     @RequestMapping("/getBoardList")
     public String getBoardList(@PageableDefault Pageable pageable, Model model)
     {
@@ -99,19 +114,6 @@ public class NoticeBoardController
 //
 //
 //
-//    @GetMapping("/updateNBoard")
-//    public String updateNBoardView(NBoard nBoard, Model model)
-//    {
-//        model.addAttribute("nBoard", nBoardService.getNBoard(nBoard));
-//        return "updateNBoard";
-//    }
-//
-//    @PostMapping("/updateNBoard")
-//    public String updateNBoard(NBoard nBoard)
-//    {
-//        nBoardService.updateNBoard(nBoard);
-//        return "forward:getNBoardList";
-//    }
 //
 
 }
