@@ -1,18 +1,18 @@
 package com.itsgo.service;
 
-import com.itsgo.dto.QBoard;
+import com.itsgo.dto.BoardSuggestDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface QBoardService
 {
-    Page<QBoard> getQBoardList(Pageable pageable);
+    Page<BoardSuggestDto> getQBoardList(Pageable pageable);
 
-    void insertQBoard(QBoard qBoard);
+    void insertQBoard(BoardSuggestDto qBoard);
 
-    QBoard getQBoard(QBoard qBoard);
+    BoardSuggestDto getQBoard(BoardSuggestDto qBoard);
 
-    void updateQBoard(QBoard qBoard);
+    void updateQBoard(BoardSuggestDto qBoard);
 
-    void deleteQBoard(QBoard qBoard);
+    void deleteQBoard(BoardSuggestDto qBoard);
 }
