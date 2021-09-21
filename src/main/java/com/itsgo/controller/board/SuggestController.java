@@ -1,6 +1,9 @@
 package com.itsgo.controller.board;
 
+import com.itsgo.domain.board.BoardNotice;
 import com.itsgo.domain.board.BoardSuggest;
+import com.itsgo.dto.BoardNoticeDto;
+import com.itsgo.dto.BoardSuggestDto;
 import com.itsgo.mapstuct.BoardSuggestMapper;
 import com.itsgo.service.board.BoardSuggestService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -27,19 +33,29 @@ public class SuggestController
         return "/board/suggest/getBoardList";
     }
 
-//
-//    @GetMapping("/insertQBoard")
-//    public String insertQBoardView()
-//    {
-//        return "insertQBoard";
-//    }
-//
-//    @PostMapping("/insertQBoard")
-//    public String insertQBoard(QBoard qBoard)
-//    {
-//        qBoardService.insertQBoard(qBoard);
-//        return "redirect:getQBoardList";
-//    }
+    @GetMapping("/insertBoard")
+    public String insertBoardView()
+    {
+        return "/board/suggest/insertBoard";
+    }
+
+    @PostMapping("/insertBoard")
+    public String insertBoard(@ModelAttribute BoardSuggestDto dto)
+    {
+        boardService.insertBoard(toEntity(dto));
+        return "redirect:getBoardList";
+    }
+
+    protected BoardSuggestDto toDto(BoardSuggest e)
+    {
+        return boardMapper.toDto(e);
+    }
+
+    protected BoardSuggest toEntity(BoardSuggestDto d)
+    {
+        return boardMapper.toEntity(d);
+    }
+
 //
 //    @GetMapping("/getQBoard")
 //    public String getQBoard(QBoard qBoard, Model model)

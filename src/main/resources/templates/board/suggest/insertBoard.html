@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>건의글쓰기</title>
+</head>
+<body>
+    <h1>건의글쓰기</h1>
+    <form th:action="@{/board/suggest/insertBoard}" method="post">
+        <table>
+            <tr>
+                <td><label for="boardTitle">제목</label></td>
+                <td colspan="3"><input type="text" id="boardTitle" name="boardTitle"></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <textarea name="boardContent" cols="40" rows="10"></textarea>
+                </td>
+            </tr>
+            <tr>
+                공개여부
+                <input type="radio" id="suggestIsSecret1" name="suggestIsSecret" value="0">
+                <label for="suggestIsSecret1">공개</label>
+                <input type="radio" id="suggestIsSecret2" name="suggestIsSecret" value="1">
+                <label for="suggestIsSecret2">비공개</label>
+            </tr>
+            <tr>
+                <input type="submit" value="건의글등록">
+                <input type="button" value="취소" th:onclick="|location.href='@{/board/suggest/getBoardList}'|">
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+
