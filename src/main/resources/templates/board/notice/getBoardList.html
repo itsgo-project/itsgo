@@ -19,40 +19,40 @@
             <td th:text="${boardList.boardHit}"></td>
         </tr>
     </table>
-    <!--
-    <table th:with="start=${T(Math).floor(nBoardList.number / 10) * 10 + 1},
-                    last=(${start + 9 < nBoardList.totalPages ? start + 9 : nBoardList.totalPages})">
+
+    <table th:with="start=${T(Math).floor(boardList.number / 10) * 10 + 1},
+                    last=(${start + 9 < boardList.totalPages ? start + 9 : boardList.totalPages})">
         <tr>
             <td>
-                <a th:href="@{/getNBoardList(page=1)}">
+                <a th:href="@{/board/notice/getBoardList(page=1)}">
                     First
                 </a>
             </td>
             <td>
-                <a th:href="${nBoardList.first} ? '#' : @{/getNBoardList(page=${nBoardList.number})}">
+                <a th:href="${boardList.first} ? '#' : @{/board/notice/getBoardList(page=${boardList.number})}">
                     &lt;
                 </a>
             </td>
-            <td th:if="${0 == nBoardList.totalPages}" th:text="1">
+            <td th:if="${0 == boardList.totalPages}" th:text="1">
             </td>
 
-            <td th:each="page: ${#numbers.sequence(start, last)}" th:unless="${0 == nBoardList.totalPages}">
-                <a th:text="${page}" th:href="${page == nBoardList.number + 1} ? '#' : @{/getNBoardList(page=${page})}"></a>
+            <td th:each="page: ${#numbers.sequence(start, last)}" th:unless="${0 == boardList.totalPages}">
+                <a th:text="${page}" th:href="${page == boardList.number + 1} ? '#' : @{/board/notice/getBoardList(page=${page})}"></a>
             </td>
 
             <td>
-                <a th:href="${nBoardList.last} ? '#' : @{/getNBoardList(page=${nBoardList.number + 2})}">
+                <a th:href="${boardList.last} ? '#' : @{/board/notice/getBoardList(page=${boardList.number + 2})}">
                     &gt;
                 </a>
             </td>
             <td>
-                <a th:href="@{/getNBoardList(page=${nBoardList.totalPages})}">
+                <a th:href="@{/board/notice/getBoardList(page=${boardList.totalPages})}">
                     Last
                 </a>
             </td>
         </tr>
     </table>
-    -->
+
     <!--임시 -->
     <a th:href="@{/board/notice/adminPage}">관리자페이지</a>
 </body>

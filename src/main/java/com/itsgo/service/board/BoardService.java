@@ -9,8 +9,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
+@Transactional
 @RequiredArgsConstructor
 public abstract class BoardService<T extends Board, R extends BoardRepository<T>> {
 
@@ -41,24 +43,24 @@ public abstract class BoardService<T extends Board, R extends BoardRepository<T>
         boardRepository.save(board);
     }
 
+    public void deleteBoard(Long id)
+    {
+        boardRepository.deleteById(id);
+    }
+
+
+//    public void updateBoard(T board)
+//    {
+//        BoardNotice findBoard = new BoardNotice(board.getBoardTitle(), board.getBoardContent());
+//        boardRepository.save(findBoard);
+//    }
+
 //    public T getNBoard(T board)
 //    {
 //        return boardRepository.findById(board.getId()).get();
 //    }
 //
-//    @Override
-//    public void updateNBoard(NBoard nBoard)
-//    {
-//        NBoard findNBoard = nBoardRepository.findById(nBoard.getId()).get();
-//        findNBoard.setTitle(nBoard.getTitle());
-//        findNBoard.setContent(nBoard.getContent());
-//        nBoardRepository.save(findNBoard);
-//    }
+//
 
-//    @Override
-//    public void deleteNBoard(NBoard nBoard)
-//    {
-//        nBoardRepository.deleteById(nBoard.getId());
-//    }
 
 }

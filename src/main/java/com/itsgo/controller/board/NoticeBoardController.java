@@ -10,10 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("board/notice")
@@ -30,12 +27,21 @@ public class NoticeBoardController
         return "/board/notice/updateBoard";
     }
 
-//    @PostMapping("/updateNBoard")
-//    public String updateBoard(NBoard nBoard)
+    @GetMapping("/deleteBoard")
+    public String deleteBoard(@RequestParam("id") Long id)
+    {
+        boardService.deleteBoard(id);
+        return "forward:getBoardList";
+    }
+
+
+//    @PostMapping("/updateBoard")
+//    public String updateBoard(@ModelAttribute BoardNoticeDto dto)
 //    {
-//        nBoardService.updateNBoard(nBoard);
-//        return "forward:getNBoardList";
+//        boardService.updateBoard(toEntity(dto));
+//        return "forward:getBoardList";
 //    }
+
 
 
     @RequestMapping("/getBoardList")
@@ -68,7 +74,6 @@ public class NoticeBoardController
     @GetMapping("/getBoard")
     public String getBoard(Long id, Model model)
     {
-        System.out.println(id);
         model.addAttribute("boardNotice", toDto(boardService.getBoard(id)));
         return "/board/notice/getBoard";
     }
@@ -82,38 +87,5 @@ public class NoticeBoardController
     {
         return boardMapper.toEntity(d);
     }
-//    @PostMapping("/study/new")
-//    public String create(@ModelAttribute BoardStudyDto dto, Model model, RedirectAttributes redirectAttributes) {
-//        log.debug(dto.toString());
-//        BoardStudy saveBoard = boardService.save(boardMapper.toEntity(dto));
-//        redirectAttributes.addAttribute("id", saveBoard.getId());
-//        return "redirect:/study/{id}";
-//    }
-//
-//    @GetMapping("/study/{id}")
-//    public String view(@PathVariable Long id, Model model) {
-//        // model.addAttribute(new BoardStudyDto());
-//        return "/study/viewForm";
-//    }
-//
-//    @GetMapping("/study/{id}/edit")
-//    public String edit(@PathVariable Long id, Model model) {
-//        // model.addAttribute(new BoardStudyDto());
-//        return "/study/viewForm";
-//    }
-//    @PostMapping("/study/new")
-//    public String create(@ModelAttribute BoardStudyDto dto, Model model, RedirectAttributes redirectAttributes) {
-//        log.debug(dto.toString());
-//        BoardStudy saveBoard = boardService.save(boardMapper.toEntity(dto));
-//        redirectAttributes.addAttribute("id", saveBoard.getId());
-//        return "redirect:/study/{id}";
-//    }
-
-//
-//
-//
-//
-//
-//
 
 }

@@ -5,6 +5,9 @@ import com.itsgo.repository.BoardNoticeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
+@Transactional
 @Service
 @Slf4j
 public class BoardNoticeService extends BoardService<BoardNotice, BoardNoticeRepository>
