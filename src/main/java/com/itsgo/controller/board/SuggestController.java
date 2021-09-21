@@ -12,10 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -53,6 +50,13 @@ public class SuggestController
         return "/board/suggest/getBoard";
     }
 
+    @GetMapping("/deleteBoard")
+    public String deleteQboard(@RequestParam("id") Long id)
+    {
+        boardService.deleteBoard(id);
+        return "forward:getBoardList";
+    }
+
     protected BoardSuggestDto toDto(BoardSuggest e)
     {
         return boardMapper.toDto(e);
@@ -79,11 +83,6 @@ public class SuggestController
 //        return "forward:getQBoardList";
 //    }
 //
-//    @GetMapping("/deleteQBoard")
-//    public String deleteQboard(QBoard qBoard)
-//    {
-//        qBoardService.deleteQBoard(qBoard);
-//        return "forward:getQBoardList";
-//    }
+
 
 }
