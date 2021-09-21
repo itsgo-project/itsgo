@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글상세보기</title>
+</head>
+<body>
+    <h1>건의게시글상세</h1>
+    <hr>
+    <input type="hidden" name="id" th:value="${boardSuggest.id}" />
+    <table>
+        <tr>
+            <td><label for="boardTitle">제목 </label></td>
+            <td colspan="3"><input type="text" id="boardTitle" name="boardTitle" th:value="${boardSuggest.boardTitle}" readonly></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <label for="boardContent"></label>
+                <textarea id="boardContent" name="boardContent" cols="40" rows="10" th:text="${boardSuggest.boardContent}" readonly></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>빈칸</td>
+            <!--삭제 여부 팝업 후 처리-->
+            <td><a th:href="@{/board/suggest/deleteBoard(id=${boardSuggest.id})}">삭제</a></td>
+            <td><a th:href="@{/board/suggest/getBoardList}">확인</a></td>
+            <td><a th:href="@{/board/suggest/updateBoard(id=${boardSuggest.id})}">수정하기</a></td>
+        </tr>
+    </table>
+</body>
+</html>

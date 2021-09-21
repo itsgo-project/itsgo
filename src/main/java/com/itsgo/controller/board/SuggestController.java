@@ -46,6 +46,13 @@ public class SuggestController
         return "redirect:getBoardList";
     }
 
+    @GetMapping("/getBoard")
+    public String getBoard(Long id, Model model)
+    {
+        model.addAttribute("boardSuggest", toDto(boardService.getBoard(id)));
+        return "/board/suggest/getBoard";
+    }
+
     protected BoardSuggestDto toDto(BoardSuggest e)
     {
         return boardMapper.toDto(e);
@@ -56,13 +63,7 @@ public class SuggestController
         return boardMapper.toEntity(d);
     }
 
-//
-//    @GetMapping("/getQBoard")
-//    public String getQBoard(QBoard qBoard, Model model)
-//    {
-//        model.addAttribute("qBoard", qBoardService.getQBoard(qBoard));
-//        return "getQBoard";
-//    }
+
 //
 //    @GetMapping("/updateQBoard")
 //    public String updateQBoardView(QBoard qBoard, Model model)
