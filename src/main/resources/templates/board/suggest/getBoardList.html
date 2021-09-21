@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>건의글 목록</h1>
+    <table>
+        <tr>
+            <th width="100">글 번호</th>
+            <th width="200">글 제목</th>
+            <th width="150">처리 여부</th>
+        </tr>
+        <tr th:each="boardList:${boardList}">
+            <td th:text="${boardList.id}"></td>
+            <td><a th:href="@{/board/suggest/getBoard(id=${boardList.id})}"
+                   th:text="${boardList.boardTitle}"></a></td>
+            <td th:text="${boardList.suggestProcessing}"></td>
+        </tr>
+    </table>
+    <lable for="inquiry"></lable>
+    <input type="button" id="inquiry" value="건의하기" th:onclick="|location.href='@{/board/suggest/insertBoard}'|">
+
+    <table th:with="start=${T(Math).floor(boardList.number / 15) * 15 + 1},
+                    last=(${start + 9 < boardList.totalPages ? start + 9 : boardList.totalPages})">
+        <tr>
+            <td>
+                <a th:href="@{/board/suggest/getBoardList(page=1)}">
+                First
+                </a>
+            </td>
+            <td>
+                <a th:href="${boardList.first} ? '#' : @{/board/suggest/getBoardList(page=${boardList.number})}">
+                &lt;
+                </a>
+            </td>
+            <td th:if="${0 == boardList.totalPages}" th:text="1">
+            </td>
+            <td th:each="page: ${#numbers.sequence(start, last)}" th:unless="${0 == boardList.totalPages}">
+                <a th:text="${page}" th:href="${page == boardList.number + 1} ? '#' : @{/board/suggest/getBoardList(page=${page})}"></a>
+            </td>
+            <td>
+                <a th:href="${boardList.last} ? '#' : @{/board/suggest/getBoardList(page=${boardList.number + 2})}">
+                &gt;
+                </a>
+            </td>
+            <td>
+                <a th:href="@{/board/suggest/getBoardList(page=${boardList.totalPages})}">
+                    Last
+                </a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
