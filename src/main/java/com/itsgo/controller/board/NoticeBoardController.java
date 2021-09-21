@@ -34,14 +34,12 @@ public class NoticeBoardController
         return "forward:getBoardList";
     }
 
-
-//    @PostMapping("/updateBoard")
-//    public String updateBoard(@ModelAttribute BoardNoticeDto dto)
-//    {
-//        boardService.updateBoard(toEntity(dto));
-//        return "forward:getBoardList";
-//    }
-
+    @PostMapping("/updateBoard")
+    public String updateBoard(@ModelAttribute BoardNoticeDto dto)
+    {
+        boardService.updateBoard(toEntity(dto));
+        return "forward:getBoardList";
+    }
 
 
     @RequestMapping("/getBoardList")

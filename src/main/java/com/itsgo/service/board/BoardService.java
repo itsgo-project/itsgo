@@ -28,6 +28,7 @@ public abstract class BoardService<T extends Board, R extends BoardRepository<T>
 
     public T getBoard(Long id)
     {
+//        boardRepository.upHit();
         return boardRepository.findById(id).get();
     }
 
@@ -48,19 +49,11 @@ public abstract class BoardService<T extends Board, R extends BoardRepository<T>
         boardRepository.deleteById(id);
     }
 
+    public void updateBoard(T board)
+    {
+        boardRepository.save(board);
+    }
 
-//    public void updateBoard(T board)
-//    {
-//        BoardNotice findBoard = new BoardNotice(board.getBoardTitle(), board.getBoardContent());
-//        boardRepository.save(findBoard);
-//    }
-
-//    public T getNBoard(T board)
-//    {
-//        return boardRepository.findById(board.getId()).get();
-//    }
-//
-//
 
 
 }

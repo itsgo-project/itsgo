@@ -30,7 +30,6 @@ public class QBoardServiceImpl implements QBoardService
     @Override
     public Page<QBoard> getQBoardList(Pageable pageable)
     {
-//        makeData();
         int page= (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
         pageable = PageRequest.of(page, 15, Sort.by("id").descending());
 
