@@ -8,7 +8,6 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Getter
@@ -25,7 +24,7 @@ public abstract class Board extends BaseEntity {
 
     private String boardTitle;
 
-    @Column(insertable = false, updatable = false, columnDefinition = "MEDIUMINT UNSIGNED default 0") // UNSIGNED
+    @Column(updatable = false, columnDefinition = "MEDIUMINT UNSIGNED default 0") // UNSIGNED
     private Integer boardHit;
 
     @Lob
@@ -37,9 +36,10 @@ public abstract class Board extends BaseEntity {
     @CreatedBy
     private String createdBy;
 
-    public Board(String boardTitle, String boardContent) {
+    public Board(String boardTitle, String boardContent, Long id) {
         super();
         this.boardTitle = boardTitle;
         this.boardContent = boardContent;
+        this.id = id;
     }
 }

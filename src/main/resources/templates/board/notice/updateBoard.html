@@ -15,6 +15,7 @@
                 <label for="id">
                     <input type="hidden" id="id" name="id" th:value="${boardNotice.id}" />
                 </label>
+                <input type="hidden" name="_method" value="put" >
             </tr>
             <tr>
                 <td><label for="boardTitle">제목</label></td>
@@ -22,7 +23,7 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    <textarea name="content" cols="40" rows="10" th:text="${boardNotice.boardContent}" />
+                    <textarea name="boardContent" cols="40" rows="10" th:text="${boardNotice.boardContent}" />
                 </td>
             </tr>
             <tr>

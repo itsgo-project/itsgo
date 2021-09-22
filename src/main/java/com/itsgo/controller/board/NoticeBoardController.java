@@ -31,14 +31,14 @@ public class NoticeBoardController
     public String deleteBoard(@RequestParam("id") Long id)
     {
         boardService.deleteBoard(id);
-        return "forward:getBoardList";
+        return "redirect:getBoardList";
     }
 
-    @PostMapping("/updateBoard")
+    @PutMapping("/updateBoard")
     public String updateBoard(@ModelAttribute BoardNoticeDto dto)
     {
         boardService.updateBoard(toEntity(dto));
-        return "forward:getBoardList";
+        return "redirect:getBoardList";
     }
 
 

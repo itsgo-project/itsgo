@@ -43,8 +43,8 @@ public class BoardStudy extends Board {
     }
 
     @Builder
-    public BoardStudy(String boardTitle, String boardContent, Integer studyMax) {
-        super(boardTitle, boardContent);
+    public BoardStudy(String boardTitle, String boardContent, Integer studyMax, Long id) {
+        super(boardTitle, boardContent, id);
         this.studyMax = studyMax;
     }
 

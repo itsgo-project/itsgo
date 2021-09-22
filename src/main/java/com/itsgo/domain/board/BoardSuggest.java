@@ -6,8 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 
-import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
 @Entity
 @Getter
@@ -23,9 +24,9 @@ public class BoardSuggest extends Board
     private Integer suggestProcessing;
 
     @Builder
-    public BoardSuggest(String boardTitle, String boardContent, Integer suggestIsSecret, Integer suggestProcessing)
+    public BoardSuggest(String boardTitle, String boardContent, Integer suggestIsSecret, Integer suggestProcessing, Long id)
     {
-        super(boardTitle, boardContent);
+        super(boardTitle, boardContent, id);
         this.suggestIsSecret = suggestIsSecret;
         this.suggestProcessing = suggestProcessing;
     }

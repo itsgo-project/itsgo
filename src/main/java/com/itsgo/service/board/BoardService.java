@@ -32,13 +32,6 @@ public abstract class BoardService<T extends Board, R extends BoardRepository<T>
         return boardRepository.findById(id).get();
     }
 
-    public Page<T> getBoardList(Pageable pageable)
-    {
-        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
-        pageable = PageRequest.of(page, 15, Sort.by("id").descending());
-        return boardRepository.findAll(pageable);
-    }
-
     public void insertBoard(T board)
     {
         boardRepository.save(board);
@@ -53,7 +46,5 @@ public abstract class BoardService<T extends Board, R extends BoardRepository<T>
     {
         boardRepository.save(board);
     }
-
-
 
 }

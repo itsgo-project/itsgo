@@ -1,8 +1,6 @@
 package com.itsgo.controller.board;
 
-import com.itsgo.domain.board.BoardNotice;
 import com.itsgo.domain.board.BoardSuggest;
-import com.itsgo.dto.BoardNoticeDto;
 import com.itsgo.dto.BoardSuggestDto;
 import com.itsgo.mapstuct.BoardSuggestMapper;
 import com.itsgo.service.board.BoardSuggestService;
@@ -54,7 +52,21 @@ public class SuggestController
     public String deleteQboard(@RequestParam("id") Long id)
     {
         boardService.deleteBoard(id);
-        return "forward:getBoardList";
+        return "redirect:getBoardList";
+    }
+
+    @GetMapping("/updateBoard")
+    public String updateBoardView(@RequestParam("id") Long id, Model model)
+    {
+        model.addAttribute("boardSuggest", toDto(boardService.getBoard(id)));
+        return "/board/suggest/updateBoard";
+    }
+
+    @PutMapping("/updateBoard")
+    public String updateQBoard(@ModelAttribute BoardSuggestDto dto)
+    {
+        boardService.updateBoard(toEntity(dto));
+        return "redirect:getBoardList";
     }
 
     protected BoardSuggestDto toDto(BoardSuggest e)
@@ -66,23 +78,5 @@ public class SuggestController
     {
         return boardMapper.toEntity(d);
     }
-
-
-//
-//    @GetMapping("/updateQBoard")
-//    public String updateQBoardView(QBoard qBoard, Model model)
-//    {
-//        model.addAttribute("qBoard", qBoardService.getQBoard(qBoard));
-//        return "updateQBoard";
-//    }
-//
-//    @PostMapping("/updateQBoard")
-//    public String updateQBoard(QBoard qBoard)
-//    {
-//        qBoardService.updateQBoard(qBoard);
-//        return "forward:getQBoardList";
-//    }
-//
-
 
 }

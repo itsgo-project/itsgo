@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글상세보기</title>
+</head>
+<body>
+    <h1>수정하기</h1>
+    <hr>
+    <!--수정 부분 수정해야함 -->
+    <form th:action="@{/board/suggest/updateBoard}" method="post">
+        <input type="hidden" name="id" th:value="${boardSuggest.id}" />
+        <input type="hidden" name="_method" value="put" >
+        <table>
+            <tr>
+                <td><label for="boardTitle">제목</label></td>
+                <td colspan="3"><input type="text" id="boardTitle" name="boardTitle" th:value="${boardSuggest.boardTitle}"></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <label for="boardContent"></label>
+                    <textarea id="boardContent" name="boardContent" cols="40" rows="10" th:text="${boardSuggest.boardContent}" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td><input type="submit" value="수정"></td>
+                <td><input type="button" th:value="취소" th:onclick="|location.href='@{/board/suggest/getBoardList}'|"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

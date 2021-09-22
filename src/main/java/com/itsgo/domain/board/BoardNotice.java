@@ -9,7 +9,6 @@ import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -19,9 +18,9 @@ import java.time.LocalDateTime;
 public class BoardNotice extends Board {
 
     @Builder
-    public BoardNotice(String boardTitle, String boardContent)
+    public BoardNotice(String boardTitle, String boardContent, Long id)
     {
-        super(boardTitle, boardContent);
+        super(boardTitle, boardContent, id);
     }
 
 }
