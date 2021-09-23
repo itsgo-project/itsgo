@@ -5,6 +5,7 @@ import com.itsgo.dto.BoardNoticeDto;
 import com.itsgo.mapstuct.BoardNoticeMapper;
 import com.itsgo.service.board.BoardNoticeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -19,6 +20,7 @@ public class NoticeBoardController
 {
     private final BoardNoticeService boardService;
     private final BoardNoticeMapper boardMapper;
+
 
     @GetMapping("/updateBoard")
     public String updateBoardView(Long id, Model model)
@@ -70,7 +72,7 @@ public class NoticeBoardController
     }
 
     @GetMapping("/getBoard")
-    public String getBoard(Long id, Model model)
+    public String getBoard(@RequestParam("id") Long id, Model model)
     {
         model.addAttribute("boardNotice", toDto(boardService.getBoard(id)));
         return "/board/notice/getBoard";

@@ -89,12 +89,9 @@ spring:
   h2:
     console:
       enabled: true
-
-
-
   jpa:
     hibernate:
-      ddl-auto: create # Application 실행 시점에 Table 초기화
+      ddl-auto: update # Application 실행 시점에 Table 초기화
     properties:
       hibernate:
         show_sql: true

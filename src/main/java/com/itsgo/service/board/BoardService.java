@@ -1,13 +1,8 @@
 package com.itsgo.service.board;
 
 import com.itsgo.domain.board.Board;
-import com.itsgo.domain.board.BoardNotice;
 import com.itsgo.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -28,7 +23,7 @@ public abstract class BoardService<T extends Board, R extends BoardRepository<T>
 
     public T getBoard(Long id)
     {
-//        boardRepository.upHit();
+        boardRepository.upHit(id);
         return boardRepository.findById(id).get();
     }
 
