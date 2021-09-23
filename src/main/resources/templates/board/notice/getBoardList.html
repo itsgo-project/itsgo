@@ -19,7 +19,6 @@
             <td th:text="${boardList.boardHit}"></td>
         </tr>
     </table>
-
     <table th:with="start=${T(Math).floor(boardList.number / 10) * 10 + 1},
                     last=(${start + 9 < boardList.totalPages ? start + 9 : boardList.totalPages})">
         <tr>
@@ -52,7 +51,6 @@
             </td>
         </tr>
     </table>
-
     <!--임시 -->
     <a th:href="@{/board/notice/adminPage}">관리자페이지</a>
 </body>

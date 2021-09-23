@@ -9,5 +9,4 @@ public interface BoardRepository<T extends Board> extends JpaRepository<T, Long>
 
 
 
-
 }
